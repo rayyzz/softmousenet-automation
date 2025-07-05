@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="SoftMouse Automation Suite" verbose="1">
+  <test name="Colony Management Tests">
+    <classes>
+      <class name="tests.LoginTest"/>
+      <class name="tests.CreateAnimalTest"/>
+      <class name="tests.CreateCageTest"/>
+      <class name="tests.AssignGenotypeTest"/>
+      <class name="tests.ExportDataTest"/>
+    </classes>
+  </test>
+</suite>

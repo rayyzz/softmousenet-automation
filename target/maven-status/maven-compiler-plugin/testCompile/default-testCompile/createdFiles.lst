@@ -1,0 +1,6 @@
+tests\CreateAnimalTest.class
+tests\ExportDataTest.class
+tests\BaseTest.class
+tests\AssignGenotypeTest.class
+tests\CreateCageTest.class
+tests\LoginTest.class

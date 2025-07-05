@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Surefire suite]" verbose="0">
+  <test thread-count="1" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="tests.CreateCageTest">
+        <methods>
+          <include name="createCageWithMouse"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.CreateCageTest -->
+      <class name="tests.AssignGenotypeTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="assignGenotypeToMouse"/>
+        </methods>
+      </class> <!-- tests.AssignGenotypeTest -->
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="testLogin"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.ExportDataTest">
+        <methods>
+          <include name="exportColonyData"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.ExportDataTest -->
+      <class name="tests.CreateAnimalTest">
+        <methods>
+          <include name="createNewMouse"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- tests.CreateAnimalTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->

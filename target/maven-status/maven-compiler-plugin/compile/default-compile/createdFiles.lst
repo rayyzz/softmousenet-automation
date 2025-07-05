@@ -1,0 +1,6 @@
+pages\CagePage.class
+pages\BasePage.class
+pages\ExportPage.class
+pages\GenotypePage.class
+pages\LoginPage.class
+pages\AnimalPage.class
