@@ -21,8 +21,9 @@ public class AssignGenotypeTest extends BaseTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultsDiv")));
 
         // Step 4: Find and click the checkbox of a specific mouse row
-       WebElement targetRowCheckbox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[contains(text(),'M')] and td[contains(text(),'07-06-2023')] and td[contains(text(),'Dummy-Strain')]]//input[@type='checkbox']"
+       WebElement targetRowCheckbox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[td[contains(text(),'M')] and td[contains(text(),'06-13-2024')] and td[contains(text(),'55w')] and td[contains(text(),'Stock')]]//input[@type='checkbox']"
         )));
+        
         // Scroll into view in case it's not visible
         //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", targetRowCheckbox);
         targetRowCheckbox.click();
@@ -32,10 +33,16 @@ public class AssignGenotypeTest extends BaseTest {
         editButton.click();
 
         System.out.println("Successfully navigated to the genotype editing page.");
+
+        // Step 6: Wait for Gene dropdown and select value
+        WebElement strainDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("mouselineId")));
+        Select strainSelect = new Select(strainDropdown);
+        strainSelect.selectByVisibleText("NSG"); // or "VatCre", "WT"
         
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("editSave")));
         WebElement genotypeBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("editOpenCloseImage")));
         genotypeBtn.click();
+
 
         // Step 6: Wait for Gene dropdown and select value
         WebElement geneDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("geneId")));
@@ -52,8 +59,21 @@ public class AssignGenotypeTest extends BaseTest {
         addGenotypeBtn.click();
 
         // Step 9: Click the save and exit button
-        WebElement saveandExitBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("editSave")));
+        WebElement saveandExitBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("editSaveAndBack")));
         saveandExitBtn.click();
+
+        // Step 10: Wait until returned to mouse list page
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultsDiv")));
+
+        // Step 11: Assert genotype column contains tdTom(+)
+        WebElement updatedRow = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//tr[td[contains(text(),'M')] and td[contains(text(),'06-13-2024')] and td[contains(text(),'55w')] and td[contains(text(),'Stock')] and td[contains(text(),'tdTom(+)')]]//input[@type='checkbox']")
+        ));
+
+
+        // Assert it's displayed
+        assert updatedRow.isDisplayed() : "Genotype tdTom(+) not found in the updated mouse row.";
+
 
 
         

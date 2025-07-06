@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
+// import org.testng.Assert;
 
 public class EndAnimalTest extends BaseTest {
 
@@ -22,7 +23,7 @@ public class EndAnimalTest extends BaseTest {
 
         // 4. Locate and select mouse with known attributes
         WebElement targetRowCheckbox = wait.until(ExpectedConditions.elementToBeClickable(
-            By.xpath("//tr[td[@title='T1'] and td[contains(text(),'M')] and td[contains(text(),'11-11-2024')] and td[contains(text(),'tdTomato VatCre')]]//input[@type='checkbox']")));
+            By.xpath("//tr[td[contains(text(),'M')] and td[contains(text(),'07-19-2023')] and td[contains(text(),'102w')] and td[contains(text(),'Stock')] and td[contains(text(),'Dummy-Strain')]]//input[@type='checkbox']")));
         targetRowCheckbox.click();
 
 
@@ -33,7 +34,7 @@ public class EndAnimalTest extends BaseTest {
         // 6. Fill out end animal form
         WebElement endDate = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("endDatePicker")));
         //endDate.clear();
-        endDate.sendKeys("07-01-2025"); // Use any date
+        endDate.sendKeys("07-02-2025"); // Use any date
 
         Select endTypeDropdown = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.id("endTypeId"))));
         endTypeDropdown.selectByVisibleText("Found Dead");
@@ -53,5 +54,22 @@ public class EndAnimalTest extends BaseTest {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
 
         System.out.println("Mouse successfully marked as deceased.");
+        // ---------- Assertion Block: Filter and Verify Mouse is Listed as Dead ----------
+
+        // 7. Refresh the animal list page
+        driver.get("https://softmouse.net/smdb/mouse/list.do");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultsDiv")));
+
+        // Assert the mouse is no longer visible in the list
+        try {
+            driver.findElement(By.xpath("//tr[td[contains(text(),'M')] and td[contains(text(),'07-19-2023')] and td[contains(text(),'102w')] and td[contains(text(),'Stock')] and td[contains(text(),'Dummy-Strain')] and td[contains(text(),'tdTom(+)')]]//input[@type='checkbox']"));
+            // If found, fail the test
+            throw new AssertionError("Mouse still appears in the active list after being marked as deceased.");
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            // Expected case — mouse not found
+            System.out.println("Mouse correctly does not appear in the active list.");
+        }
+
+
     }
 }

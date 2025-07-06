@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 
+// Manual Test case 1 - TC01
+
 public class CreateAnimalTest extends BaseTest {
 
     @Test

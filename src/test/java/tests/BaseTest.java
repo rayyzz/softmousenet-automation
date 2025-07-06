@@ -53,13 +53,13 @@ public class BaseTest {
         WebElement loginButton = driver.findElement(By.id("secureLogin"));
         loginButton.click();
 
-        // ✅ Wait for the dashboard root element to ensure login completed
+        // Wait for the dashboard root element to ensure login completed
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("root")));
 
-        // ✅ Now go directly to the desired page
+        // Now go directly to the desired page
         driver.get("https://softmouse.net/smdb/mouseline/list.do?reqCode=gotoMouselinelist");
 
-        // ✅ Click the "Mice" tab
+        // Click the "Mice" tab
         WebElement miceTab = wait.until(ExpectedConditions.elementToBeClickable(By.id("mice")));
         miceTab.click();
 
